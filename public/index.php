@@ -409,8 +409,8 @@ $ctaBtnLink = $ctaCheckupData['button_link'] ?? '/public/appointment.php';
 <?php if ($isVisible('appointment')): ?>
 <?php
 $apptBadge = $appointmentData['badge_text'] ?? 'Appointment';
-$apptHeading = $appointmentData['heading'] ?? "Book Your\nAppointment";
-$apptDesc = $appointmentData['description'] ?? 'Schedule your visit with our specialists. Fill out the form and we\'ll confirm your appointment within 24 hours.';
+$apptHeading = $appointmentData['heading'] ?? "Take care of your health\nwith a professional approach.";
+$apptDesc = $appointmentData['description'] ?? 'Experience concierge-level care with board-certified specialists, flexible visit types, and fast confirmations tailored to your schedule.';
 ?>
 <section class="appointment-section">
     <div class="appt-bg-shapes">
@@ -423,112 +423,154 @@ $apptDesc = $appointmentData['description'] ?? 'Schedule your visit with our spe
         <div class="row align-items-center g-5">
 
             <div class="col-lg-5 appt-info fade-in-left">
-                <div class="appt-badge-pill mb-3">
-                    <i class="fas fa-calendar-alt me-2"></i><?= e($apptBadge) ?>
+                <div class="appt-label-row">
+                    <div class="appt-badge-pill">
+                        <i class="fas fa-calendar-alt me-2"></i><?= e($apptBadge) ?>
+                    </div>
+                    <div class="appt-premium-chip">
+                        <i class="fas fa-shield-alt me-2"></i>Premium care
+                    </div>
                 </div>
                 <h2 class="appt-heading"><?= nl2br(e($apptHeading)) ?></h2>
                 <p class="appt-desc"><?= e($apptDesc) ?></p>
 
+                <div class="appt-highlight-grid">
+                    <div class="appt-highlight-card">
+                        <div class="highlight-icon"><i class="fas fa-user-md"></i></div>
+                        <div>
+                            <strong>The best specialists in the city</strong>
+                            <small>Pick the doctor that fits your needs.</small>
+                        </div>
+                    </div>
+                    <div class="appt-highlight-card alt">
+                        <div class="highlight-icon"><i class="fas fa-comment-medical"></i></div>
+                        <div>
+                            <strong>Personalized support</strong>
+                            <small>Book online or in-person with confidence.</small>
+                        </div>
+                    </div>
+                </div>
+
                 <ul class="appt-checklist">
-                    <li><i class="fas fa-check-circle"></i> Confirmed within 24 hours</li>
-                    <li><i class="fas fa-check-circle"></i> Board-certified specialists</li>
-                    <li><i class="fas fa-check-circle"></i> Flexible scheduling options</li>
+                    <li><i class="fas fa-check-circle"></i> Instant scheduling with concierge follow-up</li>
+                    <li><i class="fas fa-check-circle"></i> Board-certified doctors & care teams</li>
+                    <li><i class="fas fa-check-circle"></i> Flexible slots that fit your day</li>
                 </ul>
 
                 <div class="appt-contact-cards">
                     <div class="appt-contact-card">
                         <div class="appt-contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <small>Doctor location</small>
+                            <strong>Near you or online</strong>
+                            <div class="appt-contact-sub">Choose the closest clinic or a virtual consult.</div>
+                        </div>
+                    </div>
+                    <div class="appt-contact-card appt-contact-card--accent">
+                        <div class="appt-contact-icon">
                             <i class="fas fa-phone-alt"></i>
                             <span class="appt-pulse-ring"></span>
                         </div>
                         <div>
-                            <small>Call us directly</small>
+                            <small>Contact info</small>
                             <strong><?= e($settings['phone'] ?? '+1 (800) 123-4567') ?></strong>
-                        </div>
-                    </div>
-                    <div class="appt-contact-card">
-                        <div class="appt-contact-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div>
-                            <small>Working Hours</small>
-                            <strong><?= e($settings['working_hours'] ?? 'Mon–Sat: 8:00 AM – 7:00 PM') ?></strong>
+                            <div class="appt-contact-sub"><?= e($settings['working_hours'] ?? 'Mon–Sat: 8:00 AM – 7:00 PM') ?></div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-7 fade-in-right">
-                <div class="appt-form-card">
-                    <div class="appt-form-header">
-                        <div class="appt-form-header-icon"><i class="fas fa-notes-medical"></i></div>
-                        <div>
-                            <h5 class="mb-0 fw-bold">Request an Appointment</h5>
-                            <small class="opacity-75">Fill in the details and we'll confirm shortly</small>
-                        </div>
+                <div class="appt-form-floating">
+                    <div class="appt-form-badge">
+                        <i class="fas fa-magic me-2"></i>Concierge booking experience
                     </div>
-                    <form action="/public/appointment.php" method="POST" class="needs-validation appt-form" novalidate>
-                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCSRFToken()) ?>">
-                        <input type="hidden" name="book_appointment" value="1">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <div class="appt-input-wrap">
-                                    <i class="fas fa-user appt-input-icon"></i>
-                                    <input type="text" name="patient_name" class="form-control" placeholder="Full Name" required>
-                                </div>
+                    <div class="appt-form-card">
+                        <div class="appt-form-header">
+                            <div class="appt-form-header-icon"><i class="fas fa-notes-medical"></i></div>
+                            <div>
+                                <div class="appt-form-kicker">Premium care scheduling</div>
+                                <h5 class="mb-0 fw-bold">Book Appointment</h5>
+                                <small class="opacity-75">Tailored care with quick confirmation</small>
                             </div>
-                            <div class="col-md-6">
-                                <div class="appt-input-wrap">
-                                    <i class="fas fa-envelope appt-input-icon"></i>
-                                    <input type="email" name="email" class="form-control" placeholder="Email Address" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="appt-input-wrap">
-                                    <i class="fas fa-phone appt-input-icon"></i>
-                                    <input type="tel" name="phone" class="form-control" placeholder="Phone Number" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="appt-input-wrap">
-                                    <i class="fas fa-hospital appt-input-icon"></i>
-                                    <select name="department_id" class="form-select" required>
-                                        <option value="">Select Department</option>
-                                        <?php foreach ($departments as $dept): ?>
-                                        <option value="<?= $dept['department_id'] ?>"><?= e($dept['name']) ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="appt-input-wrap">
-                                    <i class="fas fa-calendar appt-input-icon"></i>
-                                    <input type="date" name="appointment_date" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="appt-input-wrap">
-                                    <i class="fas fa-clock appt-input-icon"></i>
-                                    <input type="time" name="appointment_time" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="appt-input-wrap">
-                                    <i class="fas fa-comment-medical appt-input-icon appt-input-icon--ta"></i>
-                                    <textarea name="message" class="form-control" rows="3" placeholder="Additional Notes (optional)"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <button type="submit" class="btn-appointment">
-                                    <span class="btn-appt-inner">
-                                        <i class="fas fa-paper-plane"></i>
-                                        <span>Submit Appointment</span>
-                                    </span>
-                                    <span class="btn-appt-shine"></span>
-                                </button>
-                            </div>
+                            <div class="appt-form-chip"><i class="fas fa-clock me-1"></i>Under 5 min response</div>
                         </div>
-                    </form>
+                        <form action="/public/appointment.php" method="POST" class="needs-validation appt-form" novalidate>
+                            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(generateCSRFToken()) ?>">
+                            <input type="hidden" name="book_appointment" value="1">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="appt-input-wrap">
+                                        <i class="fas fa-user appt-input-icon"></i>
+                                        <input type="text" name="patient_name" class="form-control" placeholder="Full Name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="appt-input-wrap">
+                                        <i class="fas fa-envelope appt-input-icon"></i>
+                                        <input type="email" name="email" class="form-control" placeholder="Email Address" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="appt-input-wrap">
+                                        <i class="fas fa-phone appt-input-icon"></i>
+                                        <input type="tel" name="phone" class="form-control" placeholder="Phone Number" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="appt-input-wrap">
+                                        <i class="fas fa-hospital appt-input-icon"></i>
+                                        <select name="department_id" class="form-select" required>
+                                            <option value="">Select Department</option>
+                                            <?php foreach ($departments as $dept): ?>
+                                            <option value="<?= $dept['department_id'] ?>"><?= e($dept['name']) ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="appt-input-wrap">
+                                        <i class="fas fa-user-md appt-input-icon"></i>
+                                        <select name="doctor_id" class="form-select">
+                                            <option value="">Select Doctor (optional)</option>
+                                            <?php foreach ($doctors as $doc): ?>
+                                            <option value="<?= $doc['doctor_id'] ?>"><?= e($doc['name']) ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="appt-input-wrap">
+                                        <i class="fas fa-calendar appt-input-icon"></i>
+                                        <input type="date" name="appointment_date" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="appt-input-wrap">
+                                        <i class="fas fa-clock appt-input-icon"></i>
+                                        <input type="time" name="appointment_time" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="appt-input-wrap">
+                                        <i class="fas fa-comment-medical appt-input-icon appt-input-icon--ta"></i>
+                                        <textarea name="message" class="form-control" rows="3" placeholder="Additional Notes (optional)"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn-appointment">
+                                        <span class="btn-appt-inner">
+                                            <i class="fas fa-paper-plane"></i>
+                                            <span>Submit Appointment</span>
+                                        </span>
+                                        <span class="btn-appt-shine"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
 
