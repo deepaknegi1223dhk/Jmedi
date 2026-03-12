@@ -618,7 +618,10 @@ a {
    APPOINTMENT SECTION — PRO REDESIGN
 ═══════════════════════════════════════ */
 .appointment-section {
-    background: linear-gradient(135deg, #0a0f24 0%, #0b2c4d 38%, #0b476c 68%, #0e6f7d 100%);
+    background:
+        radial-gradient(circle at 18% 18%, rgba(93, 220, 255, 0.16), transparent 32%),
+        radial-gradient(circle at 82% 6%, rgba(80, 198, 255, 0.14), transparent 28%),
+        linear-gradient(135deg, #081a3f 0%, #0c3f7a 55%, #0593c4 100%);
     color: white;
     padding: 6rem 0;
     position: relative;
@@ -635,24 +638,24 @@ a {
 }
 .appt-shape-1 {
     width: 520px; height: 520px;
-    background: radial-gradient(circle, #38bdf8, transparent 70%);
-    top: -120px; right: -130px;
+    background: radial-gradient(circle, rgba(93, 220, 255, 0.32), transparent 70%);
+    top: -140px; right: -130px;
 }
 .appt-shape-2 {
     width: 350px; height: 350px;
-    background: radial-gradient(circle, #34d399, transparent 70%);
-    bottom: -100px; left: -80px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.22), transparent 70%);
+    bottom: -120px; left: -80px;
 }
 .appt-shape-3 {
     width: 220px; height: 220px;
-    background: radial-gradient(circle, #a78bfa, transparent 70%);
-    top: 50%; left: 38%;
-    opacity: 0.05;
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.25), transparent 70%);
+    top: 42%; left: 40%;
+    opacity: 0.08;
 }
 .appt-dots {
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
     background-size: 28px 28px;
 }
 
@@ -703,139 +706,105 @@ a {
     color: rgba(255,255,255,0.75);
     line-height: 1.75;
     font-size: 1rem;
-    margin-bottom: 1.4rem;
+    margin-bottom: 1rem;
 }
-.appt-highlight-grid {
+.appt-pill-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 0.85rem;
-    margin-bottom: 1.1rem;
+    gap: 0.95rem;
+    margin: 1.4rem 0 1.1rem;
 }
-.appt-highlight-card {
+.appt-pill-card {
     display: flex;
     align-items: center;
     gap: 0.85rem;
-    padding: 0.95rem 1.1rem;
+    padding: 1rem 1.15rem;
     border-radius: 16px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.14);
-    box-shadow: 0 18px 40px rgba(0,0,0,0.18);
-    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.22);
+    box-shadow: 0 16px 38px rgba(0,0,0,0.2);
+    backdrop-filter: blur(12px);
 }
-.appt-highlight-card.alt {
-    background: linear-gradient(135deg, rgba(14,165,233,0.16), rgba(14,148,136,0.24));
-    border-color: rgba(14,165,233,0.32);
-}
-.appt-highlight-card strong {
+.appt-pill-card strong {
     color: #fff;
     font-weight: 800;
     font-size: 1rem;
     letter-spacing: -0.2px;
 }
-.appt-highlight-card small {
+.appt-pill-card small {
     display: block;
-    color: rgba(255,255,255,0.65);
+    color: rgba(255,255,255,0.7);
     font-weight: 600;
 }
-.highlight-icon {
+.appt-pill-icon {
     width: 48px; height: 48px;
     border-radius: 14px;
-    background: linear-gradient(135deg, #0ea5e9, #7c3aed);
+    background: linear-gradient(135deg, #5ddcff, #3c67e3 52%, #4e93f8);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     color: #fff;
-    font-size: 1.15rem;
-    box-shadow: 0 10px 22px rgba(14,165,233,0.35);
+    font-size: 1.1rem;
+    box-shadow: 0 14px 35px rgba(60,103,227,0.35);
 }
-.appt-checklist {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
-}
-.appt-checklist li {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 0.93rem;
-    color: rgba(255,255,255,0.85);
-}
-.appt-checklist li i {
-    color: #34d399;
-    font-size: 1rem;
-    flex-shrink: 0;
-}
-.appt-contact-cards {
+.appt-contact-bar {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1rem;
     margin-top: 1.2rem;
 }
-.appt-contact-card {
+.appt-contact-item {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
+    gap: 0.9rem;
+    padding: 1rem 1.2rem;
     border-radius: 16px;
-    padding: 1rem 1.3rem;
-    backdrop-filter: blur(10px);
-    transition: background 0.3s, transform 0.25s, box-shadow 0.25s;
-    box-shadow: 0 16px 38px rgba(0,0,0,0.2);
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.22);
+    transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
 }
-.appt-contact-card:hover { background: rgba(255,255,255,0.14); transform: translateY(-2px); }
-.appt-contact-card--accent {
-    background: linear-gradient(135deg, rgba(14,165,233,0.16), rgba(15,118,110,0.28));
-    border-color: rgba(14,165,233,0.32);
-    box-shadow: 0 20px 40px rgba(14,165,233,0.25);
-}
+.appt-contact-item:hover { transform: translateY(-2px); background: rgba(255,255,255,0.14); box-shadow: 0 22px 50px rgba(0,0,0,0.26); }
 .appt-contact-icon {
-    position: relative;
     width: 46px; height: 46px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #0ea5e9, #7c3aed);
+    border-radius: 14px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem;
-    flex-shrink: 0;
-}
-.appt-contact-card small {
-    display: block;
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 0.1rem;
-}
-.appt-contact-card strong {
-    font-size: 0.97rem;
+    background: linear-gradient(135deg, #0ea5e9, #2563eb);
     color: #fff;
-    font-weight: 700;
+    font-size: 1.05rem;
+    flex-shrink: 0;
+    position: relative;
+}
+.appt-contact-icon.alt {
+    background: linear-gradient(135deg, #22d3ee, #4ade80);
+}
+.appt-contact-item small {
+    display: block;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 0.05rem;
+    letter-spacing: 0.2px;
+}
+.appt-contact-item strong {
+    font-size: 1.02rem;
+    color: #fff;
+    font-weight: 800;
 }
 .appt-contact-sub {
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.68);
+    font-size: 0.84rem;
+    color: rgba(255,255,255,0.72);
     margin-top: 2px;
 }
 /* Pulse ring on phone icon */
-.appt-pulse-ring {
-    position: absolute;
-    inset: -5px;
-    border-radius: 50%;
-    border: 2px solid rgba(14,165,233,0.5);
-    animation: apptPulse 2s ease-out infinite;
-}
-@keyframes apptPulse {
-    0%   { transform: scale(1); opacity: 1; }
-    100% { transform: scale(1.6); opacity: 0; }
-}
-
 /* ── Right form card ── */
 .appt-form-floating {
     position: relative;
-    padding: 0.4rem;
+    padding: 0.75rem;
     border-radius: 26px;
-    background: radial-gradient(circle at 20% 20%, rgba(14,165,233,0.12), transparent 45%), radial-gradient(circle at 80% 0%, rgba(99,102,241,0.12), transparent 40%);
+    background:
+        radial-gradient(circle at 16% 20%, rgba(255,255,255,0.12), transparent 42%),
+        radial-gradient(circle at 88% 8%, rgba(255,255,255,0.08), transparent 38%);
 }
 .appt-form-badge {
     display: inline-flex;
@@ -850,15 +819,15 @@ a {
     margin-left: 0.4rem;
     margin-bottom: 0.5rem;
     backdrop-filter: blur(12px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
 }
 .appt-form-card {
-    background: rgba(255,255,255,0.97);
+    background: linear-gradient(160deg, rgba(255,255,255,0.2), rgba(255,255,255,0.08));
     border-radius: 24px;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.35), 0 10px 30px rgba(14,165,233,0.08);
+    box-shadow: 0 32px 90px rgba(5,22,50,0.45), 0 12px 36px rgba(14,165,233,0.18);
     overflow: hidden;
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.6);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.32);
     position: relative;
 }
 .appt-form-header {
@@ -867,7 +836,7 @@ a {
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 1rem;
-    background: linear-gradient(135deg, #0b2c4d, #0ea5e9);
+    background: linear-gradient(135deg, #143a83, #0ea5e9 60%, #22d3ee);
     padding: 1.2rem 1.6rem;
     color: #fff;
 }
@@ -900,7 +869,7 @@ a {
 }
 .appt-form {
     padding: 1.7rem;
-    background: linear-gradient(180deg, rgba(14,165,233,0.04), transparent 45%);
+    background: linear-gradient(180deg, rgba(255,255,255,0.08), transparent 50%);
 }
 
 /* ── Input wrapper with icon ── */
@@ -924,9 +893,9 @@ a {
 .appt-form .form-control,
 .appt-form .form-select {
     padding: 0.82rem 0.95rem 0.82rem 2.6rem;
-    border: 1.5px solid #e2e8f0;
+    border: 1.5px solid rgba(255,255,255,0.35);
     border-radius: 12px;
-    background: #f8fafc;
+    background: rgba(255,255,255,0.9);
     color: #0f172a;
     font-size: 0.92rem;
     transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
@@ -936,7 +905,7 @@ a {
 .appt-form .form-select:focus {
     border-color: #0ea5e9;
     background: #fff;
-    box-shadow: 0 15px 35px rgba(14,165,233,0.12);
+    box-shadow: 0 15px 35px rgba(14,165,233,0.18);
     outline: none;
     color: #0f172a;
 }
@@ -991,7 +960,7 @@ a {
 /* ── Responsive ── */
 @media (max-width: 767.98px) {
     .appt-form { padding: 1.2rem; }
-    .appt-contact-cards { flex-direction: column; }
+    .appt-contact-bar { grid-template-columns: 1fr; }
     /* Neutralise Bootstrap g-5 negative row margins on mobile to stop horizontal overflow */
     .appointment-section .row { --bs-gutter-x: 1.5rem; }
 }

@@ -409,8 +409,8 @@ $ctaBtnLink = $ctaCheckupData['button_link'] ?? '/public/appointment.php';
 <?php if ($isVisible('appointment')): ?>
 <?php
 $apptBadge = $appointmentData['badge_text'] ?? 'Appointment';
-$apptHeading = $appointmentData['heading'] ?? "Take care of your health\nwith a professional approach.";
-$apptDesc = $appointmentData['description'] ?? 'Experience concierge-level care with board-certified specialists, flexible visit types, and fast confirmations tailored to your schedule.';
+$apptHeading = $appointmentData['heading'] ?? "Your healing starts here.\nBook your appointment now.";
+$apptDesc = $appointmentData['description'] ?? 'Access premium doctors, instant confirmations, and dedicated support for every visit.';
 ?>
 <section class="appointment-section">
     <div class="appt-bg-shapes">
@@ -434,49 +434,38 @@ $apptDesc = $appointmentData['description'] ?? 'Experience concierge-level care 
                 <h2 class="appt-heading"><?= nl2br(e($apptHeading)) ?></h2>
                 <p class="appt-desc"><?= e($apptDesc) ?></p>
 
-                <div class="appt-highlight-grid">
-                    <div class="appt-highlight-card">
-                        <div class="highlight-icon"><i class="fas fa-user-md"></i></div>
+                <div class="appt-pill-grid">
+                    <div class="appt-pill-card">
+                        <div class="appt-pill-icon"><i class="fas fa-user-md"></i></div>
                         <div>
-                            <strong>The best specialists in the city</strong>
-                            <small>Pick the doctor that fits your needs.</small>
+                            <strong>Trusted specialists</strong>
+                            <small>Board-certified experts tailored to your needs</small>
                         </div>
                     </div>
-                    <div class="appt-highlight-card alt">
-                        <div class="highlight-icon"><i class="fas fa-comment-medical"></i></div>
+                    <div class="appt-pill-card">
+                        <div class="appt-pill-icon"><i class="fas fa-headset"></i></div>
                         <div>
-                            <strong>Personalized support</strong>
-                            <small>Book online or in-person with confidence.</small>
+                            <strong>Concierge guidance</strong>
+                            <small>Personal assistance from booking to follow-up</small>
                         </div>
                     </div>
                 </div>
 
-                <ul class="appt-checklist">
-                    <li><i class="fas fa-check-circle"></i> Instant scheduling with concierge follow-up</li>
-                    <li><i class="fas fa-check-circle"></i> Board-certified doctors & care teams</li>
-                    <li><i class="fas fa-check-circle"></i> Flexible slots that fit your day</li>
-                </ul>
-
-                <div class="appt-contact-cards">
-                    <div class="appt-contact-card">
-                        <div class="appt-contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
+                <div class="appt-contact-bar">
+                    <div class="appt-contact-item">
+                        <div class="appt-contact-icon"><i class="fas fa-phone-volume"></i></div>
                         <div>
-                            <small>Doctor location</small>
-                            <strong>Near you or online</strong>
-                            <div class="appt-contact-sub">Choose the closest clinic or a virtual consult.</div>
-                        </div>
-                    </div>
-                    <div class="appt-contact-card appt-contact-card--accent">
-                        <div class="appt-contact-icon">
-                            <i class="fas fa-phone-alt"></i>
-                            <span class="appt-pulse-ring"></span>
-                        </div>
-                        <div>
-                            <small>Contact info</small>
+                            <small>24/7 emergency line</small>
                             <strong><?= e($settings['phone'] ?? '+1 (800) 123-4567') ?></strong>
                             <div class="appt-contact-sub"><?= e($settings['working_hours'] ?? 'Mon–Sat: 8:00 AM – 7:00 PM') ?></div>
+                        </div>
+                    </div>
+                    <div class="appt-contact-item">
+                        <div class="appt-contact-icon alt"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <small>Visit our hospital</small>
+                            <strong>Nearest clinic or virtual</strong>
+                            <div class="appt-contact-sub">Choose a location that works for you</div>
                         </div>
                     </div>
                 </div>
@@ -492,8 +481,8 @@ $apptDesc = $appointmentData['description'] ?? 'Experience concierge-level care 
                             <div class="appt-form-header-icon"><i class="fas fa-notes-medical"></i></div>
                             <div>
                                 <div class="appt-form-kicker">Premium care scheduling</div>
-                                <h5 class="mb-0 fw-bold">Book Appointment</h5>
-                                <small class="opacity-75">Tailored care with quick confirmation</small>
+                                <h5 class="mb-0 fw-bold">Make Appointment</h5>
+                                <small class="opacity-75">We will call back soon to confirm</small>
                             </div>
                             <div class="appt-form-chip"><i class="fas fa-clock me-1"></i>Under 5 min response</div>
                         </div>
@@ -521,17 +510,6 @@ $apptDesc = $appointmentData['description'] ?? 'Experience concierge-level care 
                                 </div>
                                 <div class="col-md-6">
                                     <div class="appt-input-wrap">
-                                        <i class="fas fa-hospital appt-input-icon"></i>
-                                        <select name="department_id" class="form-select" required>
-                                            <option value="">Select Department</option>
-                                            <?php foreach ($departments as $dept): ?>
-                                            <option value="<?= $dept['department_id'] ?>"><?= e($dept['name']) ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="appt-input-wrap">
                                         <i class="fas fa-user-md appt-input-icon"></i>
                                         <select name="doctor_id" class="form-select">
                                             <option value="">Select Doctor (optional)</option>
@@ -545,6 +523,17 @@ $apptDesc = $appointmentData['description'] ?? 'Experience concierge-level care 
                                     <div class="appt-input-wrap">
                                         <i class="fas fa-calendar appt-input-icon"></i>
                                         <input type="date" name="appointment_date" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="appt-input-wrap">
+                                        <i class="fas fa-hospital appt-input-icon"></i>
+                                        <select name="department_id" class="form-select" required>
+                                            <option value="">Select Department</option>
+                                            <?php foreach ($departments as $dept): ?>
+                                            <option value="<?= $dept['department_id'] ?>"><?= e($dept['name']) ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
