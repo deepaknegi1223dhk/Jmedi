@@ -778,6 +778,110 @@ function getDefaultAppointmentConfirmedTemplateHtml(): string {
 HTML;
 }
 
+function getEmailTemplateDefaults(): array {
+    return [
+        'appointment_confirmed' => [
+            'subject' => 'Appointment Confirmed - {{clinic_name}}',
+            'body' => getDefaultAppointmentConfirmedTemplateHtml(),
+            'variables' => 'patient_name,doctor_name,appointment_date,appointment_time,clinic_name,clinic_logo,year',
+        ],
+        'appointment_cancelled' => [
+            'subject' => 'Appointment Cancelled - {{clinic_name}}',
+            'body' => <<<'HTML'
+<div style="font-size:22px;line-height:30px;color:#b42318;font-weight:700;margin-bottom:8px;">Appointment Cancelled</div>
+<div style="font-size:16px;line-height:24px;color:#1f2933;margin-bottom:12px;">Dear {{patient_name}},</div>
+<div style="font-size:16px;line-height:24px;color:#1f2933;margin-bottom:14px;">Your appointment with <strong>{{doctor_name}}</strong> was cancelled. We apologize for the inconvenience.</div>
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#fff4f2;border:1px solid #f3d4ce;border-radius:10px;margin:10px 0 14px 0;">
+  <tr>
+    <td style="padding:12px 14px;">
+      <div style="font-size:14px;line-height:20px;color:#5f6c7b;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Original slot</div>
+      <div style="font-size:18px;line-height:26px;color:#1f2933;"><strong>Date:</strong> {{appointment_date}}</div>
+      <div style="font-size:18px;line-height:26px;color:#1f2933;margin-top:6px;"><strong>Time:</strong> {{appointment_time}}</div>
+    </td>
+  </tr>
+</table>
+<div style="font-size:16px;line-height:24px;color:#1f2933;margin-bottom:10px;">If you would like to reschedule, reply to this email or call our front desk and we will help you find the next available time.</div>
+<div style="font-size:16px;line-height:24px;color:#1f2933;margin-top:14px;">Thank you,<br>{{clinic_name}}</div>
+HTML,
+            'variables' => 'patient_name,doctor_name,appointment_date,appointment_time,clinic_name',
+        ],
+        'doctor_approved' => [
+            'subject' => 'Doctor Profile Approved - {{clinic_name}}',
+            'body' => <<<'HTML'
+<div style="font-size:22px;line-height:30px;color:#0f6f90;font-weight:700;margin-bottom:8px;">Profile Approved</div>
+<div style="font-size:16px;line-height:24px;color:#1f2933;margin-bottom:12px;">Dear {{doctor_name}},</div>
+<div style="font-size:16px;line-height:24px;color:#1f2933;margin-bottom:14px;">Your doctor profile is approved and now visible to patients on {{clinic_name}}.</div>
+<div style="background:#f0f4ff;border:1px solid #d7e3ff;border-radius:10px;padding:12px 14px;margin-bottom:14px;">
+  <div style="font-size:14px;line-height:20px;color:#4b5563;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Next steps</div>
+  <div style="font-size:16px;line-height:24px;color:#1f2933;">- Keep your availability updated so patients can book instantly.</div>
+  <div style="font-size:16px;line-height:24px;color:#1f2933;">- Review your profile details and ensure contact information is correct.</div>
+  <div style="font-size:16px;line-height:24px;color:#1f2933;">- Respond promptly to new appointment requests and confirmations.</div>
+</div>
+<div style="font-size:16px;line-height:24px;color:#1f2933;margin-top:10px;">We are excited to have you onboard.</div>
+<div style="font-size:16px;line-height:24px;color:#1f2933;margin-top:14px;">Regards,<br>{{clinic_name}}</div>
+HTML,
+            'variables' => 'doctor_name,clinic_name',
+        ],
+        'patient_registration' => [
+            'subject' => 'Welcome to {{clinic_name}}',
+            'body' => <<<'HTML'
+<div style="font-size:22px;line-height:30px;color:#0f6f90;font-weight:700;margin-bottom:8px;">Welcome to {{clinic_name}}</div>
+<div style="font-size:16px;line-height:24px;color:#1f2933;margin-bottom:12px;">Dear {{patient_name}},</div>
+<div style="font-size:16px;line-height:24px;color:#1f2933;margin-bottom:14px;">Thank you for creating your account with {{clinic_name}}. You can now book appointments and manage your visits from one place.</div>
+<div style="background:#f4f9f4;border:1px solid #d7ead7;border-radius:10px;padding:12px 14px;margin-bottom:14px;">
+  <div style="font-size:14px;line-height:20px;color:#4b5563;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">What you can do</div>
+  <div style="font-size:16px;line-height:24px;color:#1f2933;">- Schedule or reschedule appointments online.</div>
+  <div style="font-size:16px;line-height:24px;color:#1f2933;">- Receive email updates about your visits.</div>
+  <div style="font-size:16px;line-height:24px;color:#1f2933;">- Keep your details up to date for faster check-in.</div>
+</div>
+<div style="font-size:16px;line-height:24px;color:#1f2933;margin-top:10px;">We look forward to seeing you soon.</div>
+<div style="font-size:16px;line-height:24px;color:#1f2933;margin-top:14px;">Regards,<br>{{clinic_name}}</div>
+HTML,
+            'variables' => 'patient_name,clinic_name',
+        ],
+        'payment_success' => [
+            'subject' => 'Payment Successful - {{clinic_name}}',
+            'body' => <<<'HTML'
+<div style="font-size:22px;line-height:30px;color:#0f6f90;font-weight:700;margin-bottom:8px;">Payment Received</div>
+<div style="font-size:16px;line-height:24px;color:#1f2933;margin-bottom:12px;">Dear {{patient_name}},</div>
+<div style="font-size:16px;line-height:24px;color:#1f2933;margin-bottom:14px;">We have successfully recorded your payment.</div>
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#f2f7ff;border:1px solid #d7e3ff;border-radius:10px;margin:10px 0 14px 0;">
+  <tr>
+    <td style="padding:12px 14px;">
+      <div style="font-size:14px;line-height:20px;color:#4b5563;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Receipt</div>
+      <div style="font-size:20px;line-height:28px;color:#0f6f90;font-weight:700;">Amount: {{amount}}</div>
+    </td>
+  </tr>
+</table>
+<div style="font-size:16px;line-height:24px;color:#1f2933;margin-bottom:10px;">This receipt has been saved to your records. If you need any assistance, reply to this email and our team will help.</div>
+<div style="font-size:16px;line-height:24px;color:#1f2933;margin-top:14px;">Thank you,<br>{{clinic_name}}</div>
+HTML,
+            'variables' => 'patient_name,amount,clinic_name',
+        ],
+        'password_reset' => [
+            'subject' => 'Password Reset Request - {{clinic_name}}',
+            'body' => <<<'HTML'
+<div style="font-size:22px;line-height:30px;color:#0f6f90;font-weight:700;margin-bottom:8px;">Reset Your Password</div>
+<div style="font-size:16px;line-height:24px;color:#1f2933;margin-bottom:12px;">Hello {{patient_name}},</div>
+<div style="font-size:16px;line-height:24px;color:#1f2933;margin-bottom:14px;">We received a request to reset the password for your {{clinic_name}} account.</div>
+<div style="text-align:center;margin:14px 0 16px 0;">
+  <a href="{{reset_link}}" style="background:#0f6f90;color:#ffffff;text-decoration:none;padding:12px 18px;border-radius:8px;font-size:16px;font-weight:600;display:inline-block;">Reset Password</a>
+</div>
+<div style="font-size:16px;line-height:24px;color:#1f2933;margin-bottom:10px;">If the button above does not work, copy and paste this link into your browser:</div>
+<div style="font-size:14px;line-height:20px;color:#0f6f90;background:#f1f5f9;border:1px solid #d8e2ef;border-radius:8px;padding:10px 12px;word-break:break-all;">{{reset_link}}</div>
+<div style="font-size:16px;line-height:24px;color:#1f2933;margin-top:14px;">If you did not request this change, you can ignore this email and your password will stay the same.</div>
+<div style="font-size:16px;line-height:24px;color:#1f2933;margin-top:14px;">Regards,<br>{{clinic_name}}</div>
+HTML,
+            'variables' => 'patient_name,reset_link,clinic_name',
+        ],
+    ];
+}
+
+function getDefaultEmailTemplate(string $templateName): ?array {
+    $defaults = getEmailTemplateDefaults();
+    return $defaults[$templateName] ?? null;
+}
+
 function buildEmailLayout(string $htmlBody, string $clinicName): string {
     $safeClinic = e($clinicName);
     return '<!doctype html><html><body style="margin:0;padding:0;background:#f4f7fb;font-family:Arial,Helvetica,sans-serif;">'
