@@ -99,15 +99,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && verifyCSRFToken($_POST['csrf_token'
 
         $renderedBody = renderTemplateVariables($body, $vars);
         $renderedSubject = renderTemplateVariables($subject, $vars);
-        $previewHtmlBody = (stripos($renderedBody, '<html') !== false || stripos($renderedBody, '<table') !== false)
+        $isFullHtml = stripos($renderedBody, '<html') !== false;
+        $previewHtmlBody = $isFullHtml
             ? $renderedBody
             : buildEmailLayout($renderedBody, (string)($vars['clinic_name'] ?? $siteName));
 
         $previewHtml = '<h6 class="mb-2">Subject: ' . e($renderedSubject) . '</h6>' . $previewHtmlBody;
         $success = 'Preview generated.';
-    } elseif ($action === 'apply_default_appointment_template' && $editing && ($editing['template_name'] ?? '') === 'appointment_confirmed') {
-        $editing['body'] = getDefaultAppointmentConfirmedTemplateHtml();
-        $success = 'Default appointment confirmation HTML loaded in editor. Click Save Changes to apply.';
+    } elseif ($action === 'apply_default_template' && $editing) {
+        $defaultTemplate = getDefaultEmailTemplate($editing['template_name'] ?? '');
+        if ($defaultTemplate) {
+            $editing['subject'] = $defaultTemplate['subject'] ?? $editing['subject'];
+            $editing['body'] = $defaultTemplate['body'] ?? $editing['body'];
+            $editing['variables'] = $defaultTemplate['variables'] ?? ($editing['variables'] ?? '');
+            $success = 'Default template loaded in editor. Click Save Changes to apply.';
+        } else {
+            $error = 'No default template available for this email.';
+        }
     }
 }
 ?>
@@ -150,6 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && verifyCSRFToken($_POST['csrf_token'
         <div class="dash-card">
             <h5 class="mb-3"><i class="fas fa-pen me-2"></i><?= $editing ? 'Edit Template' : 'Select template to edit' ?></h5>
             <?php if ($editing): ?>
+            <?php $defaultTemplate = getDefaultEmailTemplate($editing['template_name'] ?? ''); ?>
             <form method="POST">
                 <?= csrfField() ?>
                 <input type="hidden" name="template_id" value="<?= (int)$editing['id'] ?>">
@@ -178,8 +187,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && verifyCSRFToken($_POST['csrf_token'
                 <div class="d-flex gap-2 flex-wrap">
                     <button class="btn btn-primary" type="submit" name="template_action" value="save_template"><i class="fas fa-save me-1"></i>Save Changes</button>
                     <button class="btn btn-outline-secondary" type="submit" name="template_action" value="preview_template"><i class="fas fa-eye me-1"></i>Preview Email</button>
-                    <?php if (($editing['template_name'] ?? '') === 'appointment_confirmed'): ?>
-                    <button class="btn btn-outline-info" type="submit" name="template_action" value="apply_default_appointment_template"><i class="fas fa-magic me-1"></i>Load Default Appointment Template</button>
+                    <?php if ($defaultTemplate): ?>
+                    <button class="btn btn-outline-info" type="submit" name="template_action" value="apply_default_template"><i class="fas fa-magic me-1"></i>Load Default Template</button>
                     <?php endif; ?>
                 </div>
 
