@@ -51,6 +51,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && verifyCSRFToken($_POST['csrf_token'
                 $editing['status'] = $status;
             }
         }
+    } elseif ($action === 'toggle_status') {
+        $id = (int)($_POST['template_id'] ?? 0);
+        $newStatus = ($_POST['status_value'] ?? '0') === '1' ? 1 : 0;
+        if ($id) {
+            $stmt = $pdo->prepare("UPDATE email_templates SET status=:status, updated_at=CURRENT_TIMESTAMP WHERE id=:id");
+            $stmt->execute([':status' => $newStatus, ':id' => $id]);
+            $success = $newStatus === 1 ? 'Template enabled.' : 'Template disabled.';
+            $templates = getEmailTemplates($pdo);
+            foreach ($templates as $t) {
+                if ((int)$t['id'] === $id) {
+                    $editing = $t;
+                    break;
+                }
+            }
+        }
     } elseif ($action === 'preview_template') {
         $id = (int)($_POST['template_id'] ?? 0);
         $subject = trim($_POST['subject'] ?? '');
@@ -106,13 +121,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && verifyCSRFToken($_POST['csrf_token'
             <h5 class="mb-3"><i class="fas fa-envelope-open-text me-2"></i>Email Templates</h5>
             <div class="table-responsive">
                 <table class="table table-sm align-middle">
-                    <thead><tr><th>Name</th><th>Status</th><th></th></tr></thead>
+                    <thead><tr><th>Name</th><th>Status</th><th class="text-end">Actions</th></tr></thead>
                     <tbody>
                     <?php foreach ($templates as $tmp): ?>
                         <tr>
                             <td><code><?= e($tmp['template_name']) ?></code></td>
                             <td><?= (int)$tmp['status'] === 1 ? '<span class="badge bg-success">Enabled</span>' : '<span class="badge bg-secondary">Disabled</span>' ?></td>
-                            <td><a class="btn btn-sm btn-outline-primary" href="/admin/email-templates.php?edit=<?= (int)$tmp['id'] ?>">Edit</a></td>
+                            <td class="text-end">
+                                <form method="POST" class="d-inline">
+                                    <?= csrfField() ?>
+                                    <input type="hidden" name="template_id" value="<?= (int)$tmp['id'] ?>">
+                                    <input type="hidden" name="status_value" value="<?= (int)$tmp['status'] === 1 ? '0' : '1' ?>">
+                                    <button class="btn btn-sm <?= (int)$tmp['status'] === 1 ? 'btn-outline-secondary' : 'btn-outline-success' ?>" type="submit" name="template_action" value="toggle_status">
+                                        <?= (int)$tmp['status'] === 1 ? 'Disable' : 'Enable' ?>
+                                    </button>
+                                </form>
+                                <a class="btn btn-sm btn-outline-primary ms-1" href="/admin/email-templates.php?edit=<?= (int)$tmp['id'] ?>">Edit</a>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
